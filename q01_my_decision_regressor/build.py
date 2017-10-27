@@ -1,3 +1,4 @@
+# %load q01_my_decision_regressor/build.py
 # default imports
 from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeRegressor
@@ -16,3 +17,10 @@ param_grid = {"max_depth": [2, 3, 5, 6, 8, 10, 15, 20, 30, 50],
 
 
 # Write your solution here :
+def my_decision_regressor(X_train, X_test, y_train, y_test, param_grid):
+
+    grid_search = GridSearchCV(estimator=DecisionTreeRegressor(random_state=9), param_grid=param_grid,cv=5)
+    grid_search.fit(X_train,y_train)
+    y_prediction = grid_search.predict(X_test)
+
+    return r2_score(y_test,y_prediction),grid_search.best_params_
