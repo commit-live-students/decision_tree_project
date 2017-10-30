@@ -14,5 +14,12 @@ param_grid = {"max_depth": [2, 3, 5, 6, 8, 10, 15, 20, 30, 50],
               "max_leaf_nodes": [2, 3, 4, 5, 10, 15, 20],
               "max_features": [4, 8, 20, 25]}
 
-
+def my_decision_regressor (X_train, X_test, y_train, y_test,param_grid):
+    model = DecisionTreeRegressor(random_state=9)
+    clf = GridSearchCV(estimator=model, param_grid=param_grid,cv=5)
+    clf.fit(X_train, y_train)
+    y_pred = clf.best_estimator_.predict(X_test)
+    r2 = r2_score(y_test, y_pred)
+    best_params = clf.best_params_
+    return r2,best_params
 # Write your solution here :
