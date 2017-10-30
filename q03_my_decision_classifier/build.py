@@ -17,24 +17,12 @@ param_grid = {"max_depth": [8, 10, 15, 20],
               "max_features": [1, 2, 3, 5]}
 
 # Write your solution here :
-def decision_classifier_plot(X_train,X_test,y_train,y_test,depth_list):
-    test_score = []
-    train_score = []
-    for x in depth_list :
-        model = DecisionTreeClassifier(max_depth=x)
-        model.fit(X_train,y_train)
-        y_train_pred = model.predict(X_train)
-        train_score.append(accuracy_score(y_train, y_train_pred))
-        y_test_pred = model.predict(X_test)
-        test_score.append(accuracy_score(y_test, y_test_pred))
-#     for x in depth_list :
-#         model = DecisionTreeRegressor(max_depth=x)
-#         model.fit(X_test,y_test)
-#         y_test_pred = model.predict(X_test)
-#         test_score.append(mean_squared_error(y_test, y_test_pred))
-    #plt.hold(True)
-    depth_list = np.array(depth_list)
-    train_score = np.array(train_score)
-    test_score = np.array(test_score)
-    plt.plot(depth_list, train_score, "r", label="Training scores")
-    plt.plot(depth_list, test_score, "b", label="Testing score")
+def my_decision_classifier(X_train, X_test, y_train, y_test, param_grid, n_iter_search = 10):
+    decisiontree = DecisionTreeClassifier(random_state=9)
+    rand_search = RandomizedSearchCV(estimator=decisiontree, param_distributions=param_grid, n_iter=n_iter_search)
+    rand_search.fit(X_train,y_train)
+    y_pred = rand_search.predict(X_test)
+    params = rand_search.best_params_
+    #params = cross_val_score(grid_search.best_estimator_,X_train,y_train)
+    score = accuracy_score(y_test, y_pred)
+    return score, params
