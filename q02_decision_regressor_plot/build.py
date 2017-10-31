@@ -15,3 +15,25 @@ depth_list = [2, 8, 10, 15, 20, 25, 30, 35, 45, 50, 80]
 
 # Write your solution here :
 
+def decision_regressor_plot(X_train, X_test, y_train, y_test,depths):
+    train_list=[]
+    test_list=[]
+    for i in depths:
+        ds=DecisionTreeRegressor(max_depth=i)
+        ds.fit(X_train,y_train)
+        trainres=ds.predict(X_train)
+
+        msetrain=mean_squared_error(y_train,trainres)
+
+        train_list.append(msetrain)
+        testres=ds.predict(X_test)
+
+        msetest=mean_squared_error(y_test,testres)
+
+        test_list.append(msetest)
+
+    #print test_list
+    #print train_list
+
+    plt.plot(depths,test_list,c="r")
+    plt.plot(depths,train_list,c="y")
