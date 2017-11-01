@@ -1,3 +1,4 @@
+# %load q03_my_decision_classifier/build.py
 # default imports
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.tree import DecisionTreeClassifier
@@ -18,3 +19,12 @@ param_grid = {"max_depth": [8, 10, 15, 20],
 
 
 # Write your solution here :
+def my_decision_classifier(X_train, X_test, y_train, y_test,param_grid,n_iter_search=10):
+    model=DecisionTreeClassifier(random_state=9)
+    clf=RandomizedSearchCV(model,param_grid,n_iter=n_iter_search)
+    c=clf.fit(X_train,y_train)
+    ypred=c.predict(X_test)
+    ac_score=accuracy_score(y_test,ypred)
+    return ac_score,c.best_params_
+
+#my_decision_classifier(X_train, X_test, y_train, y_test,param_grid,n_iter_search=10)
