@@ -15,7 +15,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 depth_list = [8, 10, 15, 20, 50, 100, 120, 150, 175, 200]
 
+def decision_classifier_plot(X_train,X_test,y_train,y_tes,depth_list):
+
+
+    top_params = {'max_leaf_nodes': 5, 'max_features': 3, 'max_depth': 10 }
+    return 
+
 
 # Write your solution here :
-
-
