@@ -13,5 +13,18 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 depth_list = [2, 8, 10, 15, 20, 25, 30, 35, 45, 50, 80]
 
-# Write your solution here :
-
+def decision_regressor_plot(X_train,X_test,y_train,y_test,depths):
+    a=[]
+    b=[]
+    for i in depths:
+        dsc = DecisionTreeRegressor(random_state=9,max_depth=i)
+        dsc.fit(X_train,y_train)
+        y_pred_test = dsc.predict(X_test)
+        y_pred_train = dsc.predict(X_train)
+        err1 = mean_squared_error(y_test,y_pred_test)
+        err2 = mean_squared_error(y_train,y_pred_train)
+        a.append(err1)
+        b.append(err2)
+    plt.plot(depth_list,a)
+    plt.plot(depth_list,b)
+    plt.show()
