@@ -1,4 +1,3 @@
-# default imports
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
@@ -17,5 +16,5 @@ depth_list = [8, 10, 15, 20, 50, 100, 120, 150, 175, 200]
 
 
 # Write your solution here :
-
-
+def decision_classifier_plot (X_train, X_test, y_train, y_test,depths):
+    a=1
