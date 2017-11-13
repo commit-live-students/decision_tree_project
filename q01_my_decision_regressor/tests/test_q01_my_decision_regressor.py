@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from ..build import my_decision_regressor
-from inspect import getargspec
+from inspect import getfullargspec
 
 data = pd.read_csv("./data/house_pricing.csv")
 np.random.seed(9)
@@ -20,9 +20,10 @@ class TestMy_decision_regressor(TestCase):
     def test_my_decision_regressor(self):
 
         # Input parameters tests
-        args = getargspec(my_decision_regressor)
-        self.assertEqual(len(args[0]), 5, "Expected arguments %d, Given %d" % (5, len(args[0])))
-        self.assertEqual(args[3], None, "Expected default values do not match given default values")
+        args = getfullargspec(my_decision_regressor).args
+        args_default = getfullargspec(my_decision_regressor).defaults
+        self.assertEqual(len(args), 5, "Expected arguments %d, Given %d" % (5, len(args)))
+        self.assertEqual(args_default, None, "Expected default values do not match given default values")
 
         # Return data types
         r_square, best_params = my_decision_regressor(X_train, X_test, y_train, y_test, param_grid)
