@@ -18,3 +18,9 @@ param_grid = {"max_depth": [8, 10, 15, 20],
 
 
 # Write your solution here :
+def my_decision_classifier(X_train, X_test, y_train, y_test,param_grid,n_iter_search=10):
+    randsearch = RandomizedSearchCV(param_distributions=param_grid,estimator=DecisionTreeClassifier(random_state=9),n_iter=n_iter_search)
+    randsearch.fit(X_train,y_train)
+    ypred = randsearch.predict(X_test)
+
+    return accuracy_score(ypred,y_test),randsearch.best_params_
