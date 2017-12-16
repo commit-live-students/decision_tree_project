@@ -18,4 +18,3 @@ depth_list = [8, 10, 15, 20, 50, 100, 120, 150, 175, 200]
 
 # Write your solution here :
 
-
