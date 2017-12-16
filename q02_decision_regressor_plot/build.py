@@ -14,5 +14,3 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 depth_list = [2, 8, 10, 15, 20, 25, 30, 35, 45, 50, 80]
 
 # Write your solution here :
-
-
