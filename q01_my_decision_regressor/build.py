@@ -15,3 +15,16 @@ param_grid = {"max_depth": [2, 3, 5, 6, 8, 10, 15, 20, 30, 50],
               "max_features": [4, 8, 20, 25]}
 
 # Write your solution here :
+def my_decision_regressor (X_train,X_test,y_train,y_test,param_grid):
+    #Use gridsearch cv and DecisionTreeRegressor
+    model =DecisionTreeRegressor (random_state=9)
+    gridsearch = GridSearchCV(estimator=model,param_grid=param_grid,cv=5)
+
+    #Find predictions for X_test using the model fitted in X_train and y_train.
+    gridsearch.fit(X=X_train,y=y_train)
+    y_predict= gridsearch.predict(X_test)
+
+    #Measures r_square and best parameters
+    return r2_score(y_pred=y_predict,y_true=y_test), gridsearch.best_params_
+
+print my_decision_regressor (X_train,X_test,y_train,y_test,param_grid)
