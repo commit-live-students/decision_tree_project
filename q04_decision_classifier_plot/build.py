@@ -17,4 +17,16 @@ depth_list = [8, 10, 15, 20, 50, 100, 120, 150, 175, 200]
 
 
 # Write your solution here :
-
+def decision_classifier_plot(X_train, X_test, y_train, y_test,depth_list):
+    lst  = []
+    for depth in depth_list:
+        tree_reg = DecisionTreeClassifier(max_depth=depth,random_state=9)
+        tree_reg.fit(X_train, y_train)
+        y_pred_test=tree_reg.predict(X_test)
+        y_pred_train=tree_reg.predict(X_train)
+        lst.append((depth,accuracy_score(y_train,y_pred_train),accuracy_score(y_test,y_pred_test)))
+    df =  pd.DataFrame(lst)
+    plt.plot(df.iloc[:,0],df.iloc[:,1],c='r',label = 'Train')
+    plt.plot(df.iloc[:,0],df.iloc[:,2],c='g',label = 'Test')
+    plt.legend()
+    return
