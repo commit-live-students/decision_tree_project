@@ -13,4 +13,23 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 depth_list = [2, 8, 10, 15, 20, 25, 30, 35, 45, 50, 80]
 
-# Write your solution here :
+def decision_regressor_plot(X_train, X_test, y_train, y_test, depth):
+    def mse_cal(depth):
+        model = DecisionTreeRegressor(max_depth=depth)
+        model.fit(X_train,y_train)
+
+        y_pred_test = model.predict(X_test)
+        mse_test = mean_squared_error(y_test,y_pred_test)
+
+        y_pred_train = model.predict(X_train)
+        mse_train = mean_squared_error(y_train, y_pred_train)
+
+        return depth, mse_test, mse_train
+
+    results = map(lambda depth :  mse_cal(depth), depth_list)
+    results = pd.DataFrame(results)
+
+    plt.plot(results[:][0],results[:][1])
+    plt.plot(results[:][0],results[:][2])
+    plt.show()
+    return
