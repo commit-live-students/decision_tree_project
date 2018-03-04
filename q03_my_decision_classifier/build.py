@@ -18,3 +18,10 @@ param_grid = {"max_depth": [8, 10, 15, 20],
 
 
 # Write your solution here :
+def my_decision_classifier(X_train, X_test, y_train, y_test,param_grid,n_iter=10):
+    model = DecisionTreeClassifier(random_state=9)
+
+    randomS = RandomizedSearchCV(estimator=model, param_distributions=param_grid,n_iter=n_iter)
+    randomS.fit(X_train,y_train)
+    y_prediction = randomS.predict(X_test)
+    return float(accuracy_score(y_test,y_prediction)),randomS.best_params_
