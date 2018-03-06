@@ -2,7 +2,7 @@ from unittest import TestCase
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from inspect import getargspec
+from inspect import getfullargspec
 from ..build import my_decision_classifier
 
 data = pd.read_csv("./data/loan_prediction.csv")
@@ -20,10 +20,10 @@ class TestMy_decision_classifier(TestCase):
     def test_my_decision_classifier_arguments(self):
 
         # Input parameters tests
-        args = getargspec(my_decision_classifier)
+        args = getfullargspec(my_decision_classifier)
         self.assertEqual(len(args[0]), 6, "Expected arguments %d, Given %d" % (6, len(args[0])))
     def test_my_decision_classifier_defaults(self):
-        args = getargspec(my_decision_classifier)
+        args = getfullargspec(my_decision_classifier)
         self.assertEqual(args[3], (10,), "Expected default values do not match given default values")
 
         # Return data types
