@@ -15,3 +15,10 @@ param_grid = {"max_depth": [2, 3, 5, 6, 8, 10, 15, 20, 30, 50],
               "max_features": [4, 8, 20, 25]}
 
 # Write your solution here :
+def my_decision_regressor(X_train, X_test, y_train, y_test,param_grid):
+    reg_entropy = DecisionTreeRegressor(random_state=9)
+    grid_search = GridSearchCV(estimator=reg_entropy,cv=5, param_grid=param_grid)
+    grid_search.fit(X_train,y_train)
+    y_pred = grid_search.predict(X_test)
+    return float(r2_score(y_test,y_pred)),grid_search.best_params_
+    #return accuracy_score(y_pred,y_test),grid_search.best_estimator_
