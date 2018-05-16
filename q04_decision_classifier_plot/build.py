@@ -17,3 +17,17 @@ depth_list = [8, 10, 15, 20, 50, 100, 120, 150, 175, 200]
 
 
 # Write your solution here :
+def decision_classifier_plot(X_train, X_test, y_train, y_test, depths):
+    dtree = DecisionTreeClassifier(random_state=9)
+    param_grid = { "max_depth" : depths }
+    random_cv = RandomizedSearchCV(estimator=dtree, param_distributions=param_grid, n_iter=10, scoring='accuracy')
+    random_cv.fit(X_train, y_train)
+    y_pred_test = random_cv.predict(X_test)
+    df_results = pd.DataFrame(data=random_cv.cv_results_)
+    # display(df_results)
+    train_mse = plt.plot(df_results.param_max_depth, df_results.split0_train_score, color='b',label='Train_Mean_Accuracy')
+    test_mse = plt.plot(depth_list, df_results.split0_test_score, color='g',label='Test_Mean_Accuracy')
+    plt.xlabel('Tree Depth')
+    plt.ylabel('Mean Accuracy_Score')
+    plt.legend()
+    plt.show()
