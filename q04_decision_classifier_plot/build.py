@@ -1,3 +1,4 @@
+# %load q04_decision_classifier_plot/build.py
 # default imports
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.tree import DecisionTreeClassifier
@@ -7,7 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv("./data/loan_prediction.csv")
+data = pd.read_csv('./data/loan_prediction.csv')
 np.random.seed(9)
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
@@ -17,3 +18,21 @@ depth_list = [8, 10, 15, 20, 50, 100, 120, 150, 175, 200]
 
 
 # Write your solution here :
+def decision_classifier_plot(X_train, X_test, y_train, y_test,depth_list):
+    mse_listTrain=list()
+    mse_listTest=list()
+    for i in depth_list:
+        dt=DecisionTreeClassifier(max_depth=i,random_state=9)
+        dt=dt.fit(X_train,y_train)
+        y_predTrain = dt.predict(X_train)
+        mse_listTrain.append(accuracy_score(y_train,y_predTrain))
+        
+        y_predTest = dt.predict(X_test)
+        mse_listTest.append(accuracy_score(y_test,y_predTest))
+        
+    plt.plot(depth_list,mse_listTrain)
+    plt.plot(depth_list,mse_listTest)
+    plt.xlabel('depths')
+    plt.ylabel('accuracy score')
+    plt.show()
+
