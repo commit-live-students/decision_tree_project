@@ -2,7 +2,7 @@
 
 In this assignment you will learn to make a decision tree classifier.
 
-## Write a function called `my_decision_regressor` that :
+## Write a function called `my_decision_classifier` that :
 - Uses randomsearchCV and DecisionTreeClassifier.  
 - Find predictions for X_test using the model fitted in X_train and y_train.
 - Measures accuracy and best parameters.
