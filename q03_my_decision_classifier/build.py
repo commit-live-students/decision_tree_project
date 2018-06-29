@@ -19,7 +19,7 @@ param_grid = {'max_depth': [8, 10, 15, 20],
 
 
 # Write your solution here :
-def my_decision_regressor(X_train, X_test, y_train, y_test,param_grid,n_iter_search=10):
+def my_decision_classifier(X_train, X_test, y_train, y_test,param_grid,n_iter_search=10):
 
     dt = DecisionTreeClassifier(random_state=9)
     ran_search = RandomizedSearchCV(estimator = dt, param_distributions=param_grid,n_iter=n_iter_search)
