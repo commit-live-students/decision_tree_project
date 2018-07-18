@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+plt.switch_backend('agg')
 
 data = pd.read_csv("./data/loan_prediction.csv")
 np.random.seed(9)
