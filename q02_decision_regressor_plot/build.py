@@ -5,6 +5,7 @@ from sklearn.metrics import mean_squared_error
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+plt.switch_backend('agg')
 
 data = pd.read_csv("./data/house_pricing.csv")
 X = data.iloc[:, :-1]
