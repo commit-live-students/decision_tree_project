@@ -30,8 +30,12 @@ def decision_classifier_plot(X_train,X_test,y_train,y_test,depth_list):
         dt.fit(X_test,y_test)
         y_pred_test = dt.predict(X_test)
         test_score.append(accuracy_score(y_test,y_pred_test))
-    plt.plot(train_score)
-    plt.plot(test_score)
+    plt.plot(depth_list,train_score,label = 'Train set')
+    plt.plot(depth_list,test_score,label = 'Test set')
+    plt.xlabel('Depths')
+    plt.ylabel('Accuracy score')
+    plt.legend(loc = 'lower right')
+    
 decision_classifier_plot(X_train,X_test,y_train,y_test,depth_list)
 
 
