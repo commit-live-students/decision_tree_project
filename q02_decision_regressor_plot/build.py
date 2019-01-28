@@ -3,6 +3,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -34,6 +35,9 @@ def decision_regressor_plot(X_train, X_test, y_train, y_test, depth_list):
     plt.ylabel('mean square error')
     plt.legend()
     plt.show()
+
+decision_regressor_plot(X_train, X_test, y_train, y_test, depth_list)
+
 
 
 
