@@ -18,18 +18,18 @@ depth_list = [2, 8, 10, 15, 20, 25, 30, 35, 45, 50, 80]
 # Write your solution here :
 def decision_regressor_plot(X_train, X_test, y_train, y_test, depth_list):
     
-    error1 = []
-    error = []
+    train_error = []
+    test_error = []
     for d in depth_list:
         reg_tree = DecisionTreeRegressor(random_state=9, max_depth=d)
         reg_tree.fit(X_train,y_train)
         y_pred = reg_tree.predict(X_test)
-        error.append( mean_squared_error(y_test, y_pred))
+        test_error.append( mean_squared_error(y_test, y_pred))
         y_pred1 = reg_tree.predict(X_train)
-        error1.append(mean_squared_error(y_train, y_pred1))
+        train_error.append(mean_squared_error(y_train, y_pred1))
     
-    plt.plot(depth_list, error1, label = 'train set')
-    plt.plot(depth_list, error, label = 'test set')
+    plt.plot(depth_list, train_error, label = 'train set')
+    plt.plot(depth_list, test_error, label = 'test set')
     plt.xlabel('depths')
     plt.ylabel('mean square error')
     plt.legend()
